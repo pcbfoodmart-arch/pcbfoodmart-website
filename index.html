@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PCB Food Mart LLC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+            color: #222;
+        }
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 10px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        header .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        header img {
+            height: 64px;
+            width: auto;
+        }
+        header h1 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        main {
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 16px 32px;
+        }
+        .hero {
+            background: #ffffff;
+            padding: 24px 18px 28px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero img {
+            max-width: 260px;
+            width: 100%;
+            height: auto;
+        }
+        .hero-text {
+            max-width: 420px;
+        }
+        .hero-text h2 {
+            margin: 0 0 8px;
+            font-size: 1.6rem;
+        }
+        .hero-text p {
+            margin: 4px 0;
+            line-height: 1.5;
+        }
+        .pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: #e9f7e5;
+            color: #267a21;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+        .card {
+            background: #ffffff;
+            padding: 18px 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .hours-list p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+        }
+        a.button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #00ad9f;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.1rem; }
+            .hero-text h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-wrap">
+            <img src="Logo.PNG" alt="PCB Food Mart LLC logo">
+            <h1>PCB Food Mart LLC</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <img src="Logo.PNG" alt="PCB Food Mart LLC logo large">
+            <div class="hero-text">
+                <span class="pill">Local convenience • Groceries • Drinks</span>
+                <h2>Welcome to PCB Food Mart</h2>
+                <p><strong>Address:</strong><br>
+                    11218 Hutchison Blvd.<br>
+                    Panama City Beach, FL 32407
+                </p>
+                <p>
+                    Your neighborhood stop in Panama City Beach for cold drinks, snacks, groceries,
+                    and everyday convenience items.
+                </p>
+                <a class="button" href="https://maps.google.com/?q=11218+Hutchison+Blvd,+Panama+City+Beach,+FL+32407" target="_blank">
+                    Get directions
+                </a>
+            </div>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h3>Store Hours</h3>
+                <div class="hours-list">
+                    <p>Monday – Thursday: 7:00 AM – 10:00 PM</p>
+                    <p>Friday – Saturday: 7:00 AM – 11:00 PM</p>
+                    <p>Sunday: 8:00 AM – 9:00 PM</p>
+                </div>
+                <p style="font-size:0.85rem; margin-top:10px;">
+                    *Hours can change on holidays and special event days in PCB.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>What We Offer</h3>
+                <p>• Cold drinks &amp; beverages</p>
+                <p>• Snacks &amp; candy</p>
+                <p>• Everyday groceries</p>
+                <p>• Convenience items you need on the go</p>
+            </article>
+
+            <article class="card">
+                <h3>Contact</h3>
+                <p>Have questions about the store, inventory, or hours?</p>
+                <p><strong>Phone:</strong> (555) 123-4567</p>
+                <p><strong>Visit us:</strong> Stop by the store and our team will be happy to help.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> PCB Food Mart LLC. All rights reserved.
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
