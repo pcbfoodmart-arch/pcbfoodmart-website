@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PCB Food Mart LLC – Online Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f5f5;
+      color: #222;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER – centered */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      text-align: center;
+    }
+    header .left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    header img.logo {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+    }
+    header .store-info {
+      font-size: 12px;
+    }
+    header .store-info strong {
+      font-size: 14px;
+      display: block;
+    }
+    header .store-info .est {
+      font-size: 11px;
+      color: #555;
+    }
+    header .store-info .email {
+      margin-top: 2px;
+    }
+    header .cart-summary {
+      text-align: center;
+      font-size: 13px;
+    }
+    header .cart-summary span {
+      display: block;
+    }
+    header .cart-summary button {
+      margin-top: 4px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      background: #1f7a3b;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* REVIEWS SECTION AT TOP */
+    .reviews {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .reviews h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .review-slider {
+      position: relative;
+      overflow: hidden;
+      min-height: 80px;
+      margin-bottom: 12px;
+    }
+    .review-card {
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      transform: translateX(20px);
+      font-size: 13px;
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid #eee;
+    }
+    .review-card.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .review-author {
+      font-weight: bold;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+    .review-rating {
+      font-size: 12px;
+      color: #e0a800;
+    }
+    .review-form {
+      border-top: 1px solid #eee;
+      padding-top: 10px;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+    .review-form label {
+      display: block;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+    .review-form input,
+    .review-form select,
+    .review-form textarea {
+      width: 100%;
+      padding: 6px 8px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 2px;
+    }
+    .review-form textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    .review-form button {
+      margin-top: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #1f7a3b;
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .hero .est-line {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .hero .highlight {
+      font-weight: bold;
+      color: #1f7a3b;
+    }
+    .hero .hours {
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .hero .cta-buttons {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hero .cta-buttons a {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+    .hero .cta-buttons a.primary {
+      background: #1f7a3b;
+      color: #fff;
+    }
+    .hero .cta-buttons a.secondary {
+      border: 1px solid #1f7a3b;
+      color: #1f7a3b;
+      background: #ffffff;
+    }
+    .hero-note {
+      font-size: 11px;
+      color: #666;
+      margin-top: 6px;
+    }
+    .hero-list {
+      font-size: 13px;
+      padding-left: 18px;
+    }
+
+    .categories {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .categories h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .category-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .category-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .category-pill.active {
+      background: #1f7a3b;
+      color: #fff;
+      border-color: #1f7a3b;
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr); /* single column */
+      gap: 16px;
+    }
+
+    .product-section {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .product-section h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .product-section p.section-note {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      background: #fafafa;
+      position: relative;
+    }
+    .product-card img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #f0f0f0;
+      opacity: 1;
+      transition: opacity 0.2s;
+    }
+    .product-card.out-of-stock img {
+      opacity: 0.5;
+    }
+    .product-name {
+      font-weight: bold;
+    }
+    .product-category {
+      font-size: 11px;
+      color: #777;
+    }
+    .product-price {
+      font-weight: bold;
+      color: #1f7a3b;
+      margin-top: 2px;
+    }
+    /* product qty controls on each card */
+    .product-actions {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: #1f7a3b;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qty-btn.disabled {
+      background: #e0e0e0;
+      color: #888;
+      cursor: not-allowed;
+    }
+    .qty-display {
+      min-width: 26px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .product-card.out-of-stock .qty-btn {
+      background: #e0e0e0;
+      color: #888;
+      cursor: not-allowed;
+    }
+
+    .stock-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 10px;
+      background: #1f7a3b;
+      color: #fff;
+    }
+    .stock-badge.out {
+      background: #b00020;
+    }
+
+    .cart-panel {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+    .cart-panel h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .cart-items {
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 6px 0;
+      font-size: 12px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      gap: 6px;
+    }
+    .cart-item-name {
+      flex: 1;
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .cart-item-qty button {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: none;
+      background: #eee;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .cart-totals {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .cart-totals div {
+      display: flex;
+      justify-content: space-between;
+    }
+    .cart-panel button.checkout {
+      width: 100%;
+      padding: 8px 0;
+      border-radius: 18px;
+      border: none;
+      background: #ff7a00;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+    .cart-panel button.clear {
+      width: 100%;
+      padding: 6px 0;
+      border-radius: 18px;
+      border: 1px solid #ccc;
+      background: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .cart-note {
+      font-size: 11px;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .product-request {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+    .product-request h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .product-request form label {
+      display: block;
+      font-weight: bold;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+    .product-request form input,
+    .product-request form textarea {
+      width: 100%;
+      padding: 6px 8px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 2px;
+    }
+    .product-request form textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    .product-request form button {
+      margin-top: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #1f7a3b;
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    footer {
+      margin-top: 24px;
+      padding: 16px;
+      font-size: 11px;
+      text-align: center;
+      color: #666;
+    }
+    footer .email {
+      margin-top: 4px;
+    }
+
+    /* Discount modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .modal {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 420px;
+      width: 90%;
+      padding: 18px 16px 16px;
+      position: relative;
+    }
+    .modal h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .modal p {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .modal form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .modal label {
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .modal input[type="text"],
+    .modal input[type="email"],
+    .modal input[type="tel"] {
+      width: 100%;
+      padding: 7px 9px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .modal small {
+      font-size: 11px;
+      color: #666;
+    }
+    .modal .actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .modal .actions button {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .modal .actions .btn-skip {
+      background: #eee;
+      color: #333;
+    }
+    .modal .actions .btn-submit {
+      background: #1f7a3b;
+      color: #fff;
+    }
+    .modal .close-x {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    /* Checkout modal */
+    .checkout-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+    }
+    .checkout-modal-backdrop.show {
+      display: flex;
+    }
+    .checkout-modal {
+      background: #ffffff;
+      border-radius: 12px;
+      max-width: 520px;
+      width: 95%;
+      padding: 18px 16px 16px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .checkout-modal h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .checkout-modal p {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .checkout-modal label {
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .checkout-modal input,
+    .checkout-modal select,
+    .checkout-modal textarea {
+      width: 100%;
+      padding: 7px 9px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 6px;
+    }
+    .checkout-modal textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    .checkout-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px;
+    }
+    .checkout-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .checkout-actions button,
+    .checkout-actions a {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    .btn-cancel {
+      background: #eee;
+      color: #333;
+    }
+    .btn-place {
+      background: #ff7a00;
+      color: #fff;
+    }
+    .btn-pay-clover {
+      background: #1f7a3b;
+      color: #fff;
+    }
+    .checkout-modal .close-x {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #777;
+    }
+    .summary-box {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
+      margin-bottom: 8px;
+      border: 1px solid #eee;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 820px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      header .cart-summary {
+        align-self: stretch;
+        text-align: center;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+      .checkout-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left">
+      <img src="Logo.PNG" alt="PCB Food Mart LLC logo" class="logo" />
+      <div class="store-info">
+        <strong>PCB Food Mart LLC</strong>
+        <div class="est">Established 2020</div>
+        <div>11218 Hutchison Blvd<br/>Panama City Beach, FL 32407</div>
+        <div>Phone: <a href="tel:18502490936">850-249-0936</a></div>
+        <div class="email">
+          Contact us: <a href="mailto:pcbfoodmart@gmail.com">pcbfoodmart@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="cart-summary">
+      <span><strong>Cart:</strong> <span id="headerCartCount">0</span> item(s)</span>
+      <span>Total: <span id="headerCartTotal">$0.00</span></span>
+      <button type="button" onclick="scrollToCart()">View cart</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Reviews at top -->
+    <section class="reviews">
+      <h2>Customer Reviews</h2>
+      <div class="review-slider">
+        <div class="review-card active">
+          <div>"Great selection of Caribbean snacks and drinks. Friendly staff every time."</div>
+          <div class="review-rating">★★★★★</div>
+          <div class="review-author">– Local Customer</div>
+        </div>
+        <div class="review-card">
+          <div>"Always find what I need, plus unique Caribbean items I can't get at big stores."</div>
+          <div class="review-rating">★★★★★</div>
+          <div class="review-author">– PCB Visitor</div>
+        </div>
+        <div class="review-card">
+          <div>"Online order was fast and easy. Pickup was ready when I arrived."</div>
+          <div class="review-rating">★★★★★</div>
+          <div class="review-author">– Online Customer</div>
+        </div>
+      </div>
+
+      <div class="review-form">
+        <h3 style="font-size:14px;margin-bottom:4px;">Leave a review</h3>
+        <form name="customer-review" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="customer-review" />
+          <label for="reviewName">Name</label>
+          <input id="reviewName" name="name" type="text" placeholder="Your name" required />
+
+          <label for="reviewRating">Rating</label>
+          <select id="reviewRating" name="rating" required>
+            <option value="">Select rating</option>
+            <option value="5">★★★★★ (5/5)</option>
+            <option value="4">★★★★☆ (4/5)</option>
+            <option value="3">★★★☆☆ (3/5)</option>
+            <option value="2">★★☆☆☆ (2/5)</option>
+            <option value="1">★☆☆☆☆ (1/5)</option>
+          </select>
+
+          <label for="reviewMessage">Your review</label>
+          <textarea id="reviewMessage" name="message" placeholder="Share your experience" required></textarea>
+
+          <button type="submit">Submit review</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div>
+        <h1>Welcome to PCB Food Mart LLC</h1>
+        <div class="est-line">Family-owned convenience store, established 2020.</div>
+        <p class="highlight">
+          Your neighborhood Caribbean & everyday convenience store in Panama City Beach.
+        </p>
+        <p>
+          Shop snacks, drinks, groceries, fresh meats, seafood, household essentials, and more —
+          then choose in-store pickup, local delivery, or shipping.
+        </p>
+
+        <div class="hours">
+          <strong>Store Hours</strong><br/>
+          Mon–Sat: 7:00 AM – 11:00 PM<br/>
+          Sunday: 8:30 AM – 9:00 PM
+        </div>
+
+        <div class="cta-buttons">
+          <a href="#products" class="primary">Start shopping</a>
+          <a href="mailto:pcbfoodmart@gmail.com" class="secondary">Email us</a>
+        </div>
+        <p class="hero-note">
+          Payments are securely processed through our Clover account.
+          You can pay online during checkout or at pickup/delivery.
+        </p>
+      </div>
+      <div>
+        <p style="font-size:13px;margin-bottom:6px;"><strong>How online ordering & shipping works</strong></p>
+        <ol class="hero-list">
+          <li>Add items to your cart and choose pickup, local delivery, or shipping.</li>
+          <li>Submit your order with your contact and address details.</li>
+          <li>Pay securely online through Clover or at pickup, and we prepare your order.</li>
+        </ol>
+        <p class="hero-note">
+          We connect the green “Pay now with Clover” button directly to our Clover checkout page so customers can pay immediately online.
+        </p>
+      </div>
+    </section>
+
+    <section class="categories" id="products">
+      <h2>Shop by Category</h2>
+      <div class="category-list" id="categoryList">
+        <!-- Category pills generated by JS -->
+      </div>
+    </section>
+
+    <section class="content-layout">
+      <section class="product-section">
+        <h2 id="currentCategoryTitle">Featured Products</h2>
+        <p class="section-note">
+          Tap a category to filter. Product names, prices, and images are based on your real sample products – you can
+          update or expand them any time. Mark items out of stock in the code to disable the buttons.
+        </p>
+        <div class="product-grid" id="productGrid">
+          <!-- Products inserted by JS -->
+        </div>
+      </section>
+    </section>
+
+    <!-- Cart near bottom -->
+    <section class="cart-panel" id="cartPanel">
+      <h2>Your Cart</h2>
+      <div class="cart-items" id="cartItems">
+        <p style="font-size:12px;color:#777;">Your cart is empty.</p>
+      </div>
+      <div class="cart-totals">
+        <div>
+          <span>Items</span><span id="cartItemsCount">0</span>
+        </div>
+        <div>
+          <span>Subtotal</span><span id="cartSubtotal">$0.00</span>
+        </div>
+        <div>
+          <span>Estimated shipping</span><span id="cartShipping">$0.00</span>
+        </div>
+        <div>
+          <span>Tax (8%)</span><span id="cartTax">$0.00</span>
+        </div>
+        <div>
+          <strong>Estimated total</strong><strong id="cartTotal">$0.00</strong>
+        </div>
+      </div>
+      <button class="checkout" type="button" onclick="openCheckoutModal()">
+        Place order
+      </button>
+      <button class="clear" type="button" onclick="clearCart()">
+        Clear cart
+      </button>
+      <p class="cart-note">
+        You can review your order in the cart below, then place your order and pay securely online with Clover
+        or pay at pickup, depending on the option you choose.
+      </p>
+    </section>
+
+    <!-- Product request section near footer -->
+    <section class="product-request">
+      <h2>Request a Product</h2>
+      <p style="font-size:12px;margin-bottom:6px;">
+        Looking for something we don&apos;t carry yet? Tell us what product you want and we&apos;ll do our best to get it.
+      </p>
+      <form name="product-request" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="product-request" />
+        <label for="reqName">Name</label>
+        <input id="reqName" name="name" type="text" placeholder="Your name" required />
+
+        <label for="reqEmail">Email</label>
+        <input id="reqEmail" name="email" type="email" placeholder="you@example.com" />
+
+        <label for="reqProduct">Product name</label>
+        <input id="reqProduct" name="product" type="text" placeholder="Product you&apos;d like us to carry" required />
+
+        <label for="reqDetails">Details (brand, size, flavor, etc.)</label>
+        <textarea id="reqDetails" name="details" placeholder="Brand, size, flavor, or any details that help us find the right item."></textarea>
+
+        <button type="submit">Submit request</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> PCB Food Mart LLC — Established 2020</div>
+    <div>11218 Hutchison Blvd, Panama City Beach, FL 32407 — 850-249-0936</div>
+    <div class="email">
+      Contact us: <a href="mailto:pcbfoodmart@gmail.com">pcbfoodmart@gmail.com</a>
+    </div>
+    <div style="margin-top:4px;">
+      By using this site, you agree that we may contact you about your order and send promotional emails or texts when you opt in.
+    </div>
+    <div style="margin-top:6px;">
+      <strong>Refund Policy:</strong>
+      Unopened, non-perishable items in original condition may be returned with receipt within 7 days of purchase.
+      Perishable food, prepared items, and special orders are final sale. Please contact us if you have any questions
+      about a specific item.
+    </div>
+  </footer>
+
+  <!-- 5% Discount Popup Modal -->
+  <div class="modal-backdrop" id="discountBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="discountTitle">
+      <div class="close-x" id="discountCloseX">&times;</div>
+      <h3 id="discountTitle">Get 5% off your first online order</h3>
+      <p>
+        New to PCB Food Mart online? Share your info below to receive a one-time 5% discount code and
+        occasional promotions.
+      </p>
+
+      <form name="discount-signup" method="POST" data-netlify="true" id="discountForm">
+        <input type="hidden" name="form-name" value="discount-signup" />
+        <label for="discountName">Name</label>
+        <input type="text" id="discountName" name="name" placeholder="Full name" required />
+
+        <label for="discountEmail">Email</label>
+        <input type="email" id="discountEmail" name="email" placeholder="you@example.com" required />
+
+        <label for="discountPhone">Mobile phone</label>
+        <input type="tel" id="discountPhone" name="phone" placeholder="(###) ###-####" required />
+
+        <label style="font-weight:normal;">
+          <input type="checkbox" name="marketing-consent" required />
+          I agree to receive promotional emails and text messages from PCB Food Mart LLC. I understand I can opt out at any time.
+        </label>
+
+        <small>
+          We respect your privacy. We use your contact info to send your 5% discount and occasional offers.
+          Message and data rates may apply.
+        </small>
+
+        <div class="actions">
+          <button type="button" class="btn-skip" id="discountSkipBtn">No thanks</button>
+          <button type="submit" class="btn-submit">Get 5% off</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Checkout Modal (Order + Shipping form + Clover button) -->
+  <div class="checkout-modal-backdrop" id="checkoutBackdrop">
+    <div class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <div class="close-x" id="checkoutCloseX">&times;</div>
+      <h3 id="checkoutTitle">Place your order with PCB Food Mart</h3>
+      <p>
+        Review your details below. We’ll confirm your order and you can complete payment securely using Clover
+        or pay at pickup, depending on the option you choose.
+      </p>
+
+      <div class="summary-box" id="checkoutSummary">
+        <!-- Filled by JS with cart summary -->
+      </div>
+
+      <form name="online-order" method="POST" data-netlify="true" id="checkoutForm">
+        <input type="hidden" name="form-name" value="online-order" />
+        <input type="hidden" name="order-items" id="orderItemsField" />
+        <input type="hidden" name="order-subtotal" id="orderSubtotalField" />
+        <input type="hidden" name="order-shipping" id="orderShippingField" />
+        <input type="hidden" name="order-tax" id="orderTaxField" />
+        <input type="hidden" name="order-total" id="orderTotalField" />
+
+        <div class="checkout-row">
+          <div>
+            <label for="custName">Name</label>
+            <input type="text" id="custName" name="name" placeholder="Full name" required />
+          </div>
+          <div>
+            <label for="custPhone">Mobile phone</label>
+            <input type="tel" id="custPhone" name="phone" placeholder="(###) ###-####" required />
+          </div>
+        </div>
+
+        <label for="custEmail">Email</label>
+        <input type="email" id="custEmail" name="email" placeholder="you@example.com" required />
+
+        <label for="shippingMethod">Pickup, delivery, or shipping?</label>
+        <select id="shippingMethod" name="shipping-method" required>
+          <option value="pickup">In-store pickup (no fee)</option>
+          <option value="local-delivery">Local delivery – estimated $5.00</option>
+          <option value="shipping">Shipping outside PCB – estimated $9.99</option>
+        </select>
+
+        <div id="shippingAddressBlock">
+          <div class="checkout-row">
+            <div>
+              <label for="custAddress">Street address</label>
+              <input type="text" id="custAddress" name="address" placeholder="Street, apartment, etc." />
+            </div>
+            <div>
+              <label for="custCity">City</label>
+              <input type="text" id="custCity" name="city" placeholder="City" />
+            </div>
+          </div>
+          <div class="checkout-row">
+            <div>
+              <label for="custState">State</label>
+              <input type="text" id="custState" name="state" placeholder="State" />
+            </div>
+            <div>
+              <label for="custZip">ZIP code</label>
+              <input type="text" id="custZip" name="zip" placeholder="ZIP" />
+            </div>
+          </div>
+        </div>
+
+        <label for="orderNotes">Notes for the store</label>
+        <textarea id="orderNotes" name="notes" placeholder="Add delivery instructions, substitutions, or special requests."></textarea>
+
+        <small>
+          After you place your order, a team member will review it and contact you if there are any questions.
+          You can complete your payment securely with Clover or pay at pickup.
+        </small>
+
+        <div class="checkout-actions">
+          <button type="button" class="btn-cancel" id="checkoutCancelBtn">Cancel</button>
+          <button type="submit" class="btn-place">Place order</button>
+
+          <!-- Clover online checkout link -->
+          <a href="https://link.clover.com/urlshortener/xt7Ngs"
+             class="btn-pay-clover"
+             target="_blank" rel="noopener noreferrer">
+            Pay now with Clover
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // CONFIG
+    const TAX_RATE = 0.08; // 8% default tax
+    const LOCAL_ZIPS = ['32407','32408','32413']; // treat these as within ~8 miles of 32407
+
+    // SAMPLE PRODUCTS
+    const products = [
+      // Snacks
+      { id: 'snack-cheezees', name: 'Chee Zees Cheese Snack (Bag)', category: 'Snacks', price: 3.49, image: 'images/snacks_cheezees.jpg', inStock: true },
+      { id: 'snack-bigfoot', name: 'Big Foot Giant Size Snack', category: 'Snacks', price: 3.29, image: 'images/snacks_bigfoot.jpg', inStock: true },
+      { id: 'snack-chips', name: 'Classic Potato Chips', category: 'Snacks', price: 2.49, image: 'images/snacks_chips.jpg', inStock: true },
+
+      // Bakery
+      { id: 'bakery-harddough', name: 'Hard Dough Bread', category: 'Bakery', price: 3.99, image: 'images/bakery_harddough.jpg', inStock: true },
+      { id: 'bakery-buns', name: 'Sweet Buns (Pack)', category: 'Bakery', price: 4.29, image: 'images/bakery_buns.jpg', inStock: true },
+
+      // Drinks
+      { id: 'drinks-bigga', name: 'Bigga Soda Assorted Flavors (20 oz)', category: 'Drinks', price: 2.59, image: 'images/drinks_bigga.jpg', inStock: true },
+      { id: 'drinks-water', name: 'Bottled Water 16.9oz', category: 'Drinks', price: 1.29, image: 'images/drinks_water.jpg', inStock: true },
+      { id: 'drinks-juice', name: 'Fruit Juice (Assorted)', category: 'Drinks', price: 2.99, image: 'images/drinks_juice.jpg', inStock: true },
+
+      // Candy
+      { id: 'candy-mix', name: 'Assorted Caribbean Candy Mix', category: 'Candy', price: 2.75, image: 'images/candy_mix.jpg', inStock: true },
+      { id: 'candy-choc', name: 'Chocolate Bar', category: 'Candy', price: 1.79, image: 'images/candy_chocolate.jpg', inStock: true },
+
+      // Produce
+      { id: 'produce-plantain', name: 'Fresh Plantain (each)', category: 'Produce', price: 0.89, image: 'images/produce_plantain.jpg', inStock: true },
+      { id: 'produce-banana', name: 'Bananas (per lb)', category: 'Produce', price: 0.79, image: 'images/produce_bananas.jpg', inStock: true },
+
+      // Pantry
+      { id: 'pantry-vienna', name: 'Grace Vienna Sausage (Spicy)', category: 'Pantry', price: 1.79, image: 'images/pantry_vienna_spicy.jpg', inStock: true },
+      { id: 'pantry-cornflakes', name: 'Corn Flakes Cereal', category: 'Pantry', price: 4.99, image: 'images/pantry_cornflakes.jpg', inStock: true },
+      { id: 'pantry-lasco', name: 'Lasco Vanilla Soy Drink Mix', category: 'Pantry', price: 5.49, image: 'images/pantry_lasco_vanilla.jpg', inStock: true },
+
+      // Personal Care
+      { id: 'personal-bodywash', name: 'Refreshing Body Wash', category: 'Personal Care', price: 6.99, image: 'images/personal_bodywash.jpg', inStock: true },
+      { id: 'personal-soap', name: 'Bar Soap (3 Pack)', category: 'Personal Care', price: 3.99, image: 'images/personal_soap.jpg', inStock: true },
+
+      // Household
+      { id: 'household-towels', name: 'Paper Towels (2 pk)', category: 'Household', price: 4.50, image: 'images/household_paper_towels.jpg', inStock: true },
+      { id: 'household-detergent', name: 'Laundry Detergent', category: 'Household', price: 8.99, image: 'images/household_detergent.jpg', inStock: true },
+
+      // Dairy
+      { id: 'dairy-milk', name: 'Whole Milk 1 Gallon', category: 'Dairy', price: 5.25, image: 'images/dairy_milk.jpg', inStock: true },
+      { id: 'dairy-eggs', name: 'Large Eggs (12ct)', category: 'Dairy', price: 3.29, image: 'images/dairy_eggs.jpg', inStock: true },
+
+      // Beauty
+      { id: 'beauty-facecream', name: 'Moisturizing Face Cream', category: 'Beauty', price: 9.99, image: 'images/beauty_facecream.jpg', inStock: true },
+
+      // Seafood
+      { id: 'seafood-shrimp', name: 'Frozen Shrimp (1 lb bag)', category: 'Seafood', price: 12.99, image: 'images/seafood_shrimp.jpg', inStock: true },
+
+      // Poultry
+      { id: 'poultry-chicken', name: 'Fresh Chicken Drumsticks (per lb)', category: 'Poultry', price: 3.29, image: 'images/poultry_drumsticks.jpg', inStock: true },
+
+      // Red Meat
+      { id: 'redmeat-groundbeef', name: 'Fresh Ground Beef (per lb)', category: 'Red Meat', price: 5.49, image: 'images/redmeat_groundbeef.jpg', inStock: true },
+
+      // Seasonings
+      { id: 'seasonings-allpurpose', name: 'All Purpose Seasoning', category: 'Seasonings', price: 2.99, image: 'images/seasonings_allpurpose.jpg', inStock: true },
+
+      // Seasonal
+      { id: 'seasonal-sorrel', name: 'Seasonal Sorrel Drink (bottle)', category: 'Seasonal', price: 4.25, image: 'images/seasonal_sorrel.jpg', inStock: true }
+    ];
+
+    const categories = [
+      'Snacks','Bakery','Drinks','Candy','Produce','Pantry',
+      'Personal Care','Household','Dairy','Beauty',
+      'Seafood','Poultry','Red Meat','Seasonings','Seasonal'
+    ];
+
+    const categoryListEl = document.getElementById('categoryList');
+    const productGridEl = document.getElementById('productGrid');
+    const currentCategoryTitle = document.getElementById('currentCategoryTitle');
+
+    let activeCategory = null;
+    let cart = {};
+
+    function formatMoney(v) {
+      return '$' + v.toFixed(2);
+    }
+
+    function renderCategories() {
+      categoryListEl.innerHTML = '';
+      const allBtn = document.createElement('button');
+      allBtn.textContent = 'All products';
+      allBtn.className = 'category-pill' + (activeCategory === null ? ' active' : '');
+      allBtn.onclick = () => { activeCategory = null; renderCategories(); renderProducts(); };
+      categoryListEl.appendChild(allBtn);
+
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat;
+        btn.className = 'category-pill' + (activeCategory === cat ? ' active' : '');
+        btn.onclick = () => { activeCategory = cat; renderCategories(); renderProducts(); };
+        categoryListEl.appendChild(btn);
+      });
+    }
+
+    function renderProducts() {
+      let filtered = products;
+      if (activeCategory) {
+        filtered = products.filter(p => p.category === activeCategory);
+        currentCategoryTitle.textContent = activeCategory;
+      } else {
+        currentCategoryTitle.textContent = 'Featured Products';
+      }
+
+      productGridEl.innerHTML = '';
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        if (!p.inStock) {
+          card.classList.add('out-of-stock');
+        }
+
+        const img = document.createElement('img');
+        img.src = p.image;
+        img.alt = p.name;
+        card.appendChild(img);
+
+        const badge = document.createElement('div');
+        badge.className = 'stock-badge';
+        if (p.inStock) {
+          badge.textContent = 'In stock';
+        } else {
+          badge.textContent = 'Out of stock';
+          badge.classList.add('out');
+        }
+        card.appendChild(badge);
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'product-name';
+        nameEl.textContent = p.name;
+        card.appendChild(nameEl);
+
+        const catEl = document.createElement('div');
+        catEl.className = 'product-category';
+        catEl.textContent = p.category;
+        card.appendChild(catEl);
+
+        const priceEl = document.createElement('div');
+        priceEl.className = 'product-price';
+        priceEl.textContent = formatMoney(p.price);
+        card.appendChild(priceEl);
+
+        const actions = document.createElement('div');
+        actions.className = 'product-actions';
+
+        const minusBtn = document.createElement('button');
+        minusBtn.className = 'qty-btn';
+        minusBtn.textContent = '-';
+        if (!p.inStock) {
+          minusBtn.classList.add('disabled');
+          minusBtn.disabled = true;
+        }
+        minusBtn.onclick = () => { if (p.inStock) changeQty(p.id, -1); };
+
+        const qtySpan = document.createElement('span');
+        qtySpan.className = 'qty-display';
+        qtySpan.id = 'qty-display-' + p.id;
+        qtySpan.textContent = cart[p.id] || 0;
+
+        const plusBtn = document.createElement('button');
+        plusBtn.className = 'qty-btn';
+        plusBtn.textContent = '+';
+        if (!p.inStock) {
+          plusBtn.classList.add('disabled');
+          plusBtn.disabled = true;
+        }
+        plusBtn.onclick = () => { if (p.inStock) addToCart(p.id); };
+
+        actions.appendChild(minusBtn);
+        actions.appendChild(qtySpan);
+        actions.appendChild(plusBtn);
+
+        card.appendChild(actions);
+        productGridEl.appendChild(card);
+      });
+    }
+
+    function updateProductQtyDisplays() {
+      products.forEach(p => {
+        const el = document.getElementById('qty-display-' + p.id);
+        if (el) {
+          el.textContent = cart[p.id] || 0;
+        }
+      });
+    }
+
+    function addToCart(productId) {
+      if (!cart[productId]) {
+        cart[productId] = 0;
+      }
+      cart[productId] += 1;
+      renderCart();
+    }
+
+    function changeQty(productId, delta) {
+      if (!cart[productId]) return;
+      cart[productId] += delta;
+      if (cart[productId] <= 0) {
+        delete cart[productId];
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = {};
+      renderCart();
+    }
+
+    function estimateShipping(totalItems, subtotal, method) {
+      const zipInput = document.getElementById('custZip');
+      const zip = zipInput ? zipInput.value.trim() : '';
+
+      if (!method || method === 'pickup') return 0;
+      if (method === 'local-delivery') {
+        // If ZIP provided and not in local list, treat as shipping
+        if (zip && LOCAL_ZIPS.indexOf(zip) === -1) {
+          return 9.99;
+        }
+        return 5.00;
+      }
+      if (method === 'shipping') return 9.99;
+      return 0;
+    }
+
+    function renderCart() {
+      const cartItemsEl = document.getElementById('cartItems');
+      const cartItemsCountEl = document.getElementById('cartItemsCount');
+      const cartSubtotalEl = document.getElementById('cartSubtotal');
+      const cartShippingEl = document.getElementById('cartShipping');
+      const cartTaxEl = document.getElementById('cartTax');
+      const cartTotalEl = document.getElementById('cartTotal');
+      const headerCartCount = document.getElementById('headerCartCount');
+      const headerCartTotal = document.getElementById('headerCartTotal');
+      const shippingMethodSel = document.getElementById('shippingMethod');
+
+      const ids = Object.keys(cart);
+      if (ids.length === 0) {
+        cartItemsEl.innerHTML = '<p style="font-size:12px;color:#777;">Your cart is empty.</p>';
+        cartItemsCountEl.textContent = '0';
+        cartSubtotalEl.textContent = '$0.00';
+        cartShippingEl.textContent = '$0.00';
+        cartTaxEl.textContent = '$0.00';
+        cartTotalEl.textContent = '$0.00';
+        headerCartCount.textContent = '0';
+        headerCartTotal.textContent = '$0.00';
+        updateProductQtyDisplays();
+        return;
+      }
+
+      let totalItems = 0;
+      let subtotal = 0;
+      cartItemsEl.innerHTML = '';
+
+      ids.forEach(id => {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+        const qty = cart[id];
+        totalItems += qty;
+        subtotal += qty * product.price;
+
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+
+        const name = document.createElement('div');
+        name.className = 'cart-item-name';
+        name.textContent = product.name;
+        row.appendChild(name);
+
+        const controls = document.createElement('div');
+        controls.className = 'cart-item-qty';
+
+        const minus = document.createElement('button');
+        minus.textContent = '-';
+        minus.onclick = () => changeQty(id, -1);
+        controls.appendChild(minus);
+
+        const qtyEl = document.createElement('span');
+        qtyEl.textContent = qty;
+        controls.appendChild(qtyEl);
+
+        const plus = document.createElement('button');
+        plus.textContent = '+';
+        plus.onclick = () => changeQty(id, 1);
+        controls.appendChild(plus);
+
+        const price = document.createElement('span');
+        price.textContent = formatMoney(product.price * qty);
+
+        row.appendChild(controls);
+        row.appendChild(price);
+        cartItemsEl.appendChild(row);
+      });
+
+      const method = shippingMethodSel ? shippingMethodSel.value : 'pickup';
+      const shippingEst = estimateShipping(totalItems, subtotal, method);
+      const tax = subtotal * TAX_RATE;
+      const total = subtotal + shippingEst + tax;
+
+      cartItemsCountEl.textContent = totalItems.toString();
+      cartSubtotalEl.textContent = formatMoney(subtotal);
+      cartShippingEl.textContent = formatMoney(shippingEst);
+      cartTaxEl.textContent = formatMoney(tax);
+      cartTotalEl.textContent = formatMoney(total);
+      headerCartCount.textContent = totalItems.toString();
+      headerCartTotal.textContent = formatMoney(total);
+
+      updateProductQtyDisplays();
+    }
+
+    function scrollToCart() {
+      const cartPanel = document.getElementById('cartPanel');
+      cartPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Checkout modal logic
+    const checkoutBackdrop = document.getElementById('checkoutBackdrop');
+    const checkoutCloseX = document.getElementById('checkoutCloseX');
+    const checkoutCancelBtn = document.getElementById('checkoutCancelBtn');
+    const checkoutForm = document.getElementById('checkoutForm');
+    const checkoutSummary = document.getElementById('checkoutSummary');
+    const orderItemsField = document.getElementById('orderItemsField');
+    const orderSubtotalField = document.getElementById('orderSubtotalField');
+    const orderShippingField = document.getElementById('orderShippingField');
+    const orderTaxField = document.getElementById('orderTaxField');
+    const orderTotalField = document.getElementById('orderTotalField');
+    const shippingMethodSel = document.getElementById('shippingMethod');
+    const custAddressInput = document.getElementById('custAddress');
+    const custCityInput = document.getElementById('custCity');
+    const custStateInput = document.getElementById('custState');
+    const custZipInput = document.getElementById('custZip');
+
+    function openCheckoutModal() {
+      const ids = Object.keys(cart);
+      if (ids.length === 0) {
+        alert('Your cart is empty. Please add a few items first.');
+        return;
+      }
+
+      let subtotal = 0;
+      let totalItems = 0;
+      const lines = [];
+
+      ids.forEach(id => {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+        const qty = cart[id];
+        totalItems += qty;
+        const lineTotal = qty * product.price;
+        subtotal += lineTotal;
+        lines.push(qty + ' x ' + product.name + ' (' + product.category + ') – ' + formatMoney(lineTotal));
+      });
+
+      const method = shippingMethodSel.value;
+      const shippingEst = estimateShipping(totalItems, subtotal, method);
+      const tax = subtotal * TAX_RATE;
+      const total = subtotal + shippingEst + tax;
+
+      let summaryText = 'Items in your cart:\n';
+      lines.forEach(l => summaryText += '• ' + l + '\n');
+      summaryText += '\nSubtotal: ' + formatMoney(subtotal) +
+        '\nEstimated shipping: ' + formatMoney(shippingEst) +
+        '\nEstimated tax (8%): ' + formatMoney(tax) +
+        '\nEstimated total: ' + formatMoney(total) +
+        '\n\nYou can complete your payment securely with Clover after reviewing your order.';
+
+      checkoutSummary.textContent = summaryText;
+
+      orderItemsField.value = lines.join('\n');
+      orderSubtotalField.value = subtotal.toFixed(2);
+      orderShippingField.value = shippingEst.toFixed(2);
+      orderTaxField.value = tax.toFixed(2);
+      orderTotalField.value = total.toFixed(2);
+
+      checkoutBackdrop.classList.add('show');
+    }
+
+    function closeCheckoutModal() {
+      checkoutBackdrop.classList.remove('show');
+    }
+
+    checkoutCloseX.addEventListener('click', closeCheckoutModal);
+    checkoutCancelBtn.addEventListener('click', closeCheckoutModal);
+
+    shippingMethodSel.addEventListener('change', renderCart);
+    if (custZipInput) {
+      custZipInput.addEventListener('input', renderCart);
+    }
+
+    checkoutForm.addEventListener('submit', function(e) {
+      const method = shippingMethodSel.value;
+      if (method !== 'pickup') {
+        const addr = custAddressInput.value.trim();
+        const city = custCityInput.value.trim();
+        const state = custStateInput.value.trim();
+        const zip = custZipInput.value.trim();
+        if (!addr || !city || !state || !zip) {
+          e.preventDefault();
+          alert('Please enter your full shipping address (street, city, state, ZIP) before placing your order.');
+          return;
+        }
+      }
+
+      setTimeout(() => {
+        alert('Thank you! Your order has been placed. You will receive a confirmation about your order and payment shortly.');
+        closeCheckoutModal();
+        clearCart();
+      }, 150);
+    });
+
+    // Discount modal logic
+    const discountBackdrop = document.getElementById('discountBackdrop');
+    const discountForm = document.getElementById('discountForm');
+    const discountSkipBtn = document.getElementById('discountSkipBtn');
+    const discountCloseX = document.getElementById('discountCloseX');
+
+    function showDiscountModal() {
+      if (localStorage.getItem('pcb_discount_captured') === 'true') return;
+      discountBackdrop.classList.add('show');
+    }
+
+    function hideDiscountModal() {
+      discountBackdrop.classList.remove('show');
+      localStorage.setItem('pcb_discount_captured', 'true');
+    }
+
+    discountSkipBtn.addEventListener('click', hideDiscountModal);
+    discountCloseX.addEventListener('click', hideDiscountModal);
+
+    discountForm.addEventListener('submit', function() {
+      setTimeout(() => {
+        hideDiscountModal();
+        alert('Thank you! Your 5% discount will be sent to you shortly.');
+      }, 150);
+    });
+
+    // Review slider (auto-rotate every 3 seconds)
+    function initReviewSlider() {
+      const cards = document.querySelectorAll('.review-card');
+      if (!cards.length) return;
+      let index = 0;
+      function showNext() {
+        cards.forEach((card, i) => {
+          card.classList.toggle('active', i === index);
+        });
+        index = (index + 1) % cards.length;
+      }
+      showNext();
+      setInterval(showNext, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear().toString();
+      renderCategories();
+      renderProducts();
+      renderCart();
+      setTimeout(showDiscountModal, 3500);
+      initReviewSlider();
+    });
+  </script>
+</body>
+</html>
